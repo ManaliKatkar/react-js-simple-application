@@ -1,7 +1,12 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode } from "react";
 
-import { SecondaryNav, TopBar, MainFooter } from '../components'
-import { ROUTES } from '../constants'
+import { SecondaryNav, TopBar, MainFooter } from "../components";
+import { ROUTES } from "../constants";
+
+interface Props {
+  topBarContentLeft: ReactNode;
+  footerContent?: ReactNode;
+}
 
 const GLOBAL_MENU_ITEMS = [
   {
@@ -21,15 +26,12 @@ const GLOBAL_MENU_ITEMS = [
     title: ROUTES.signup.title,
     to: ROUTES.signup.url,
   },
-]
+];
 
-
-interface Props {
-  topBarContentLeft: ReactNode
-  footerContent?: ReactNode
-}
-
-export const MainPageLayout: React.FC<Props> = ({ topBarContentLeft, footerContent, children }) => {
+export const MainPageLayout: React.FC<Props> = ({
+  topBarContentLeft,
+  children,
+}) => {
   return (
     <>
       <TopBar
@@ -39,7 +41,7 @@ export const MainPageLayout: React.FC<Props> = ({ topBarContentLeft, footerConte
       <main>{children}</main>
       <MainFooter />
     </>
-  )
-}
+  );
+};
 
-MainPageLayout.displayName = 'MainPageLayout'
+MainPageLayout.displayName = "MainPageLayout";

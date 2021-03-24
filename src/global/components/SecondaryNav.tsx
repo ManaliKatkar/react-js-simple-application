@@ -1,7 +1,6 @@
-import styled from "@emotion/styled";
-import { css } from "@emotion/css";
 import React from "react";
 import { NavLink } from "react-router-dom";
+import styled from "@emotion/styled";
 
 export interface MenuItemProps {
   title: string;
@@ -43,8 +42,7 @@ export const Navbar = styled.div`
   flex-wrap: wrap;
   text-transform: capitalize;
    height: 100%;
-}
-`;
+}`;
 
 export const MenuItems = styled(NavLink)`
 color: white;
@@ -59,5 +57,4 @@ justify-content: center;
     font-weight: bold;
     background: rgba(0,0,0,.03);
   }
-}
-`;
+}`;

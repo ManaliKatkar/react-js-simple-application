@@ -1,10 +1,25 @@
+import { FC, ReactNode } from "react";
 import styled from "@emotion/styled";
-import React, { FC, ReactNode } from "react";
 
 interface Props {
   topBarContentRight?: ReactNode;
   topBarContentLeft?: ReactNode;
 }
+
+export const TopBar: FC<Props> = ({
+  topBarContentRight,
+  topBarContentLeft,
+}) => {
+
+  return (
+    <Header>
+      {topBarContentRight}
+      {topBarContentLeft}
+    </Header>
+  );
+};
+
+TopBar.displayName = "TopBar";
 
 export const Header = styled.div`
   background: #00e4bc;
@@ -20,18 +35,4 @@ export const Header = styled.div`
   position: sticky;
   z-index: 2;
   transition: transform 0.4s;
-}
-`;
-export const TopBar: FC<Props> = ({
-  topBarContentRight,
-  topBarContentLeft,
-}) => {
-  return (
-    <Header>
-      {topBarContentRight}
-      {topBarContentLeft}
-    </Header>
-  );
-};
-
-TopBar.displayName = "TopBar";
+}`;

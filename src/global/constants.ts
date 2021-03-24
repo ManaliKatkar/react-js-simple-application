@@ -6,7 +6,7 @@ export interface RouteItem {
 export interface RegistrationFormData {
   email: string;
   password: string;
-  passwordConfirmation: string;
+  fname?: string;
 }
 
 export enum RequestMethods {
@@ -18,10 +18,11 @@ export enum RequestMethods {
 }
 
 export const APP_LEVEL_CONSTANTS = {
-
+// HTML Variables
 }
 
 export const ROUTES = {
+  // Route path
   contact: {
     url: 'contact',
     title: 'contact us'

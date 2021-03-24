@@ -1,59 +1,55 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useQuery } from "react-query";
 import { useSetRecoilState } from "recoil";
 
-import {
-  ROUTES,
-  RegistrationFormData,
-  userPermissionsState,
-  ROLES,
-  PERMISSIONS,
-} from "../../global";
+import { usersQuery } from "../../api/queries";
+import { RegistrationFormData } from "../../global";
 
 import { authUserState } from "../state";
-interface FormData {
-  email: string;
-  password: string;
-  fullname: string;
-}
 
 export const LoginContainer: React.FC = () => {
   const history = useHistory();
   const setAuthUser = useSetRecoilState(authUserState);
-  const setUserPermissions = useSetRecoilState(userPermissionsState);
-  const [formState, setFormState] = useState({});
+
+  const { isSuccess, data } = useQuery("userData", usersQuery);
+
+  const [formState, setFormState] = useState<RegistrationFormData>({
+    email: "",
+    password: "",
+  });
 
   const handleChange = (event: any) => {
-    event.preventDefault();
     const { name, value } = event.target;
-    // const firstName = event.target.value
-    // this.setState({ firstName: firstName })
-    // console.log(name, value)
-    // setFormState({[name]: value});
-    // const { target: { name, value } } = event
-    // setFormState({ ...prevState,[name]: value });
+    event.preventDefault();
 
-    let temp_state = { ...formState };
-
-    // setFormState( ({...temp_state,{ [name]: value } }));
-
-    console.log("formState", formState);
-
-    // console.log(this.state) ;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
   };
-  const handleSubmit = () => {
-    console.log("formState", formState);
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+
+    if (isSuccess && data) {
+      console.log(data, typeof data);
+      data?.users.forEach((element: RegistrationFormData) => {
+        // will change security after for password and other things
+        if (true) {
+          history.push("/home");
+          // setAuthUser(element);
+        }
+      });
+    }
   };
+
   return (
     <>
       <div className="wrapper">
         <div className="form-wrapper">
-          <h2>Sign Up</h2>
+          <h2>Sign In</h2>
           <form>
-            <div className="username">
-              <label htmlFor="fullName">Full Name</label>
-              <input type="text" name="fullname" onChange={handleChange} />
-            </div>
             <div className="email">
               <label htmlFor="email">Email</label>
               <input type="email" name="email" onChange={handleChange} />
@@ -63,7 +59,7 @@ export const LoginContainer: React.FC = () => {
               <input type="password" name="password" onChange={handleChange} />
             </div>
             <div className="submit" onClick={handleSubmit}>
-              <button>Register Me</button>
+              <button>Login Here ...</button>
             </div>
           </form>
         </div>

@@ -1,7 +1,8 @@
-import React from "react";
 import { Suspense, lazy, memo, FC } from "react";
 import { Route, Switch } from "react-router";
 import { BrowserRouter } from "react-router-dom";
+
+import RegisterPage from "../../auth/pages/Register";
 
 const NotFoundPage = lazy(() =>
   import("../pages/NotFoundPage").then(({ NotFoundPage }) => ({
@@ -26,6 +27,9 @@ export const AppRoutes: FC = memo(() => {
             <HomePage />
           </Route>
           <Route path="/register">
+            <RegisterPage />
+          </Route>
+          <Route path="">
             <LoginPage />
           </Route>
           <Route path="*">
